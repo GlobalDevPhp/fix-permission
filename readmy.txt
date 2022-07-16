@@ -1,0 +1,6 @@
+  Plugin Name: Fix Permission
+  Plugin URI: https://itnotes.org.ua/fix-permission
+  Description: Fix Permission allows you to change permission for files, that you can't change with your ssh user. Work for linux and Windows servers, on behalf of Apache user www-data.
+  Version: 1.0.0
+  Author: Evgeny
+  Author URI: https://itnotes.org.ua
