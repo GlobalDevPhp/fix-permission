@@ -18,7 +18,7 @@ if (!empty($FP->loop_obj)) {
 }
 ?>
 <div class="wrap">
-    <h2><?php esc_html_e( 'Fix permission', 'fix-permission' ); ?></h2>
+    <h2><?php esc_html_e( 'Fix file permissions', 'fix-permission' ); ?></h2>
     <p><?php esc_html_e( 'Please enter paths, which you want to apply the action. You can set relative and absolute paths, but only for the current site folder.', 'fix-permission' ); ?></p>
     <p><?php esc_html_e( 'In order for the changes to be applied, you must turn off the test mode. In test mode, the plugin will look all the specified folders and files, and in the case of a recursive traversal, nested ones, but will not delete or change them.', 'fix-permission' ); ?></p>
     <form method="post" class="" action="?page=fix-permission">
@@ -32,8 +32,8 @@ wp-content/cache/index.html'; ?></textarea>
         <div>
             <p><?php esc_html_e( 'Select type the action:', 'fix-permission' ); ?></p>
             <select id="type_action" name="action_type">
-                <option value="permission" selected="selected"><?php esc_html_e( 'Fix permission', 'fix-permission' ); ?></option>
-                <option value="deletion"><?php esc_html_e( 'Delete files and folders', 'fix-permission' ); ?></option>
+                <option value="permission" selected="selected"><?php esc_html_e( 'Edit permission', 'fix-permission' ); ?></option>
+                <option value="deletion"><?php esc_html_e( 'Deleting', 'fix-permission' ); ?></option>
             </select>
             
             <select id="perm_mode" name="permission_flag">
@@ -47,9 +47,10 @@ wp-content/cache/index.html'; ?></textarea>
             </select>
         </div>
         <div> 
-            <p><?php esc_html_e( 'Whether to apply an action to subfolders and files?', 'fix-permission' ); ?></p>
+            <p><?php esc_html_e( 'You want to perform an action on subfolders and files?', 'fix-permission' ); ?></p>
+            <label for="recursion_on"><?php esc_html_e( 'Apply action recursively?', 'fix-permission' ); ?></label>                        
             <input type="checkbox" id="recursion_on" name="recursion_on" value="yes">
-            <label for="recursion_on"><?php esc_html_e( 'Apply action recursively?', 'fix-permission' ); ?></label>            
+
         </div>
         <div>
             <p></p>

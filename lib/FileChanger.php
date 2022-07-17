@@ -1,7 +1,4 @@
 <?php
-// TODO: Error Messages Warning: chmod(): Permission denied in /var/www/test_WP/src/wp-content/plugins/fix-permission/lib/FileChanger.php on line 84
-
-// TODO: Lang
 // TODO: Restfull API
 // TODO: add filler or action
 
@@ -80,7 +77,7 @@ class UpdatePermission implements FileChanger {
     public function apply(string $path) {
         $result = true;
         if (!$this->test_mode)
-            $result = chmod($path, $this->permission_flag);
+            $result = @chmod($path, $this->permission_flag);
         
         return $result;
     }
@@ -125,9 +122,9 @@ class DeleteFile implements FileChanger {
         $result = true;
         if (!$this->test_mode)
             if (is_dir($path)) {
-                $result = rmdir($path);
+                $result = @rmdir($path);
             } else
-                $result = unlink($path);
+                $result = @unlink($path);
             
         return $result;
     }
@@ -238,7 +235,7 @@ abstract class FilesLoopAbstract {
                 continue;
             }
 
-            $tmp_status = 'Not exist ';
+            $tmp_status = __( 'Not exist', 'fix-permission' ).' ';
             // Normalization and add base of path if it relative
             if (mb_strpos( wp_normalize_path($item), wp_normalize_path(ABSPATH)) === FALSE) {
                 $item = wp_normalize_path(ABSPATH.$item);
@@ -255,14 +252,14 @@ abstract class FilesLoopAbstract {
 
             $paths[$key] = $item;
             if (file_exists($item))
-                $tmp_status = 'Exist ';
+                $tmp_status = __( 'Exist', 'fix-permission' ). ' ';
             
             if (is_file($item))
-                $tmp_status .= 'file';
+                $tmp_status .= __( 'file', 'fix-permission' );
             elseif(is_dir($item))
-                $tmp_status .= 'dir';
+                $tmp_status .= __( 'dir', 'fix-permission' );
             elseif(is_link($item))
-                $tmp_status .= 'link';
+                $tmp_status .= __( 'link', 'fix-permission' );
             
             $this->statuses[$key] = $tmp_status;
         }
@@ -281,7 +278,7 @@ abstract class FilesLoopAbstract {
     public function runLoop () {
         foreach ($this->path_array AS $key => $path) {
             $this->active_path_key = $key;
-            $this->progress_count[$key] = 1;
+            $this->progress_count[$key] = 0;
             $this->applyAction($path);
         }
     }
@@ -309,9 +306,11 @@ abstract class FilesLoopAbstract {
             while($file = readdir($dir_handle)) {
                 if ($file != "." && $file != "..") {
                     if (!is_dir($path."/".$file)) {
-                        if ($changerObject->apply($path."/".$file))
+                        if ($changerObject->apply($path."/".$file)) {
                             $this->progress_count[$this->active_path_key]++;
-                        $this->log[] = $path."/".$file; 
+                            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path."/".$file;
+                        }
+                         
                     } else
                         $this->applyAction($path.'/'.$file);
                 }
@@ -350,7 +349,7 @@ abstract class FilesLoopAbstract {
         if (!empty($this->statuses)) {
             $result = '';
             foreach ($this->statuses As $key => $value) {
-                $result .= $value.'. Сhanged:'.$this->progress_count[$key].PHP_EOL;
+                $result .= $value.'. '.__( 'Edited', 'fix-permission' ). ': '.$this->progress_count[$key].PHP_EOL;
             }
         
             return $result;

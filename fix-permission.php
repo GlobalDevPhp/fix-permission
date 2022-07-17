@@ -118,7 +118,7 @@ class FixPermission {
      */
     public function admin_menu() {
         /* TODO: _x( 'Fix Permission', 'Page title', 'fix-permission' ), _x( 'Permission', 'Menu title', 'fix-permission' ) */
-        add_management_page('Fix Permission', 'Fix Permission', 'activate_plugins', 'fix-permission', array('FixPermission', 'view'));
+        add_management_page(__( 'Fix file permissions', 'fix-permission' ), __( 'Fix file permissions', 'fix-permission' ), 'activate_plugins', 'fix-permission', array('FixPermission', 'view'));
     }
 
     /**
