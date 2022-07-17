@@ -100,9 +100,7 @@ class FixPermission {
         add_action('init', array($this, 'init'));
         add_action('admin_menu', array($this, 'admin_menu'));
         // Load Translation.
-        /// *******
-        echo 'load_plugin_textdomain ' . var_export(load_plugin_textdomain('fix-permission', false, basename( dirname( __FILE__ ) ) . '/languages'), true) . ' -->';
-/// *******        
+        load_plugin_textdomain('fix-permission', false, basename( dirname( __FILE__ ) ) . '/languages');
     }
 
     /**

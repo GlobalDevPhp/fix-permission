@@ -77,7 +77,7 @@ class UpdatePermission implements FileChanger {
     public function apply(string $path) {
         $result = true;
         if (!$this->test_mode)
-            $result = @chmod($path, $this->permission_flag);
+            $result = chmod($path, $this->permission_flag);
         
         return $result;
     }
