@@ -309,7 +309,8 @@ abstract class FilesLoopAbstract {
                         if ($changerObject->apply($path."/".$file)) {
                             $this->progress_count[$this->active_path_key]++;
                             $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path."/".$file;
-                        }
+                        } else 
+                            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path."/".$file;
                          
                     } else
                         $this->applyAction($path.'/'.$file);
@@ -318,8 +319,11 @@ abstract class FilesLoopAbstract {
             closedir($dir_handle);
         }
         
-        $changerObject->apply($path);
-        $this->log[] = $path;
+        if ($changerObject->apply($path)) {
+            $this->progress_count[$this->active_path_key]++;
+            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path."/".$file;
+        } else 
+            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path."/".$file;
         
         return true;
     }
