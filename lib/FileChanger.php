@@ -231,7 +231,6 @@ abstract class FilesLoopAbstract {
                 $item = realpath($item);
 
             if (empty($item)) {
-                unset($paths[$key]);
                 continue;
             }
 
@@ -250,7 +249,7 @@ abstract class FilesLoopAbstract {
                 $item = mb_substr($item,0,$num);
             }
 
-            $paths[$key] = $item;
+            $this->path_array[$key] = $item;
             if (file_exists($item))
                 $tmp_status = __( 'Exist', 'fix-permission' ). ' ';
             
@@ -263,7 +262,6 @@ abstract class FilesLoopAbstract {
             
             $this->statuses[$key] = $tmp_status;
         }
-        $this->path_array = $paths;
     }
 
     /**
@@ -305,12 +303,12 @@ abstract class FilesLoopAbstract {
                 return false;
             while($file = readdir($dir_handle)) {
                 if ($file != "." && $file != "..") {
-                    if (!is_dir($path."/".$file)) {
-                        if ($changerObject->apply($path."/".$file)) {
+                    if (!is_dir($path.'/'.$file)) {
+                        if ($changerObject->apply($path.'/'.$file)) {
                             $this->progress_count[$this->active_path_key]++;
-                            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path."/".$file;
+                            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path.'/'.$file;
                         } else 
-                            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path."/".$file;
+                            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path.'/'.$file;
                          
                     } else
                         $this->applyAction($path.'/'.$file);
@@ -321,9 +319,9 @@ abstract class FilesLoopAbstract {
         
         if ($changerObject->apply($path)) {
             $this->progress_count[$this->active_path_key]++;
-            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path."/".$file;
+            $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path;
         } else 
-            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path."/".$file;
+            $this->log[] = __( 'Failed', 'fix-permission' ). '- '.$path;
         
         return true;
     }
