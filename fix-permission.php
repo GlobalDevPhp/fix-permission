@@ -55,9 +55,6 @@ class FixPermission {
         // Add Plugin Hooks.
         add_action('plugins_loaded', array($this, 'add_hooks'));
 
-        // Load Translation.
-        load_plugin_textdomain('wp-sweep');
-
         // Plugin Activation/Deactivation.
         register_activation_hook(__FILE__, array($this, 'plugin_activation'));
         register_deactivation_hook(__FILE__, array($this, 'plugin_deactivation'));
@@ -102,10 +99,10 @@ class FixPermission {
         // Actions.
         add_action('init', array($this, 'init'));
         add_action('admin_menu', array($this, 'admin_menu'));
-
-        //add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-        //add_action( 'wp_ajax_sweep_details', array( $this, 'ajax_sweep_details' ) );
-        //add_action( 'wp_ajax_sweep', array( $this, 'ajax_sweep' ) );
+        // Load Translation.
+        /// *******
+        echo 'load_plugin_textdomain ' . var_export(load_plugin_textdomain('fix-permission', false, basename( dirname( __FILE__ ) ) . '/languages'), true) . ' -->';
+/// *******        
     }
 
     /**
@@ -117,7 +114,6 @@ class FixPermission {
      * @return void
      */
     public function admin_menu() {
-        /* TODO: _x( 'Fix Permission', 'Page title', 'fix-permission' ), _x( 'Permission', 'Menu title', 'fix-permission' ) */
         add_management_page(__( 'Fix file permissions', 'fix-permission' ), __( 'Fix file permissions', 'fix-permission' ), 'activate_plugins', 'fix-permission', array('FixPermission', 'view'));
     }
 

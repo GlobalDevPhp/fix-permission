@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+
+#: plugins/fix-permission.php
+msgid "Fix file permissions"
+msgstr "Изменение прав файлов"
+
+#: plugins/views/admin.php
+msgid "Please enter paths, which you want to apply the action. You can set relative and absolute paths, but only for the current site folder."
+msgstr "Пожалуйста, введите пути, к которым вы хотите применить действие. Вы можете задать относительные или абсолютные пути, но только для папки текущего сайта."
+
+msgid "In order for the changes to be applied, you must turn off the test mode. In test mode, the plugin will look all the specified folders and files, and in the case of a recursive traversal, nested ones, but will not delete or change them."
+msgstr "Для того чтобы изменения вступили в силу, необходимо отключить тестовый режим. В тестовом режиме плагин будет просматривать все указанные папки и файлы, а в случае рекурсивного обхода также и вложенные, но не будет их удалять или изменять."
+
+msgid "Select type the action:"
+msgstr "Выберите тип действия:"
+
+msgid "Edit permission"
+msgstr "Изменение прав"
+
+msgid "Deleting"
+msgstr "Удаление файлов"
+
+msgid "Test mode On"
+msgstr "Тэстовий режим включен"
+
+msgid "Test mode On"
+msgstr "Тестовий режим выключен"
+
+msgid "You want to perform an action on subfolders and files?"
+msgstr "Вы хотите выполнить действие над подпапками и файлами?"
+
+msgid "Apply action recursively?"
+msgstr "Применить действие рекурсивно?"
+
+msgid "Run action"
+msgstr "Выполнить дейсвие"
+
+
+#: plugins/lib/FileChanger.php
+msgid "Not exist"
+msgstr "Не существует"
+
+msgid "Exist"
+msgstr "Найден"
+
+msgid "file"
+msgstr "файл"
+
+msgid "dir"
+msgstr "каталог"
+
+msgid "link"
+msgstr "ссылка"
+
+msgid "Success"
+msgstr "Успешно"
+
+msgid "Edited"
+msgstr "Изменено"

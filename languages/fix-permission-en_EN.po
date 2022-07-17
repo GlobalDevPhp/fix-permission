@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+
+#: plugins/fix-permission.php
+msgid "Fix file permissions"
+msgstr "Fix file permissions"
+
+#: plugins/views/admin.php
+msgid "Please enter paths, which you want to apply the action. You can set relative and absolute paths, but only for the current site folder."
+msgstr "Please enter paths, which you want to apply the action. You can set relative and absolute paths, but only for the current site folder."
+
+msgid "In order for the changes to be applied, you must turn off the test mode. In test mode, the plugin will look all the specified folders and files, and in the case of a recursive traversal, nested ones, but will not delete or change them."
+msgstr "In order for the changes to be applied, you must turn off the test mode. In test mode, the plugin will look all the specified folders and files, and in the case of a recursive traversal, nested ones, but will not delete or change them."
+
+msgid "Select type the action:"
+msgstr "Select type the action:"
+
+msgid "Edit permission"
+msgstr "Edit permission"
+
+msgid "Deleting"
+msgstr "Deleting"
+
+msgid "Test mode On"
+msgstr "Test mode On"
+
+msgid "Test mode On"
+msgstr "Test mode On"
+
+msgid "You want to perform an action on subfolders and files?"
+msgstr "You want to perform an action on subfolders and files?"
+
+msgid "Apply action recursively?"
+msgstr "Apply action recursively?"
+
+msgid "Run action"
+msgstr "Run action"
+
+
+#: plugins/lib/FileChanger.php
+msgid "Not exist"
+msgstr "Not exist"
+
+msgid "Exist"
+msgstr "Exist"
+
+msgid "file"
+msgstr "file"
+
+msgid "dir"
+msgstr "dir"
+
+msgid "link"
+msgstr "link"
+
+msgid "Success"
+msgstr "Success"
+
+msgid "Edited"
+msgstr "Edited"

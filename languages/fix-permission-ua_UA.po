@@ -58,18 +58,3 @@ msgstr "Успішно"
 
 msgid "Edited"
 msgstr "Відредаговано"
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
