@@ -24,8 +24,8 @@ msgstr "Deleting"
 msgid "Test mode On"
 msgstr "Test mode On"
 
-msgid "Test mode On"
-msgstr "Test mode On"
+msgid "Test mode Off"
+msgstr "Test mode Off"
 
 msgid "You want to perform an action on subfolders and files?"
 msgstr "You want to perform an action on subfolders and files?"
@@ -55,6 +55,9 @@ msgstr "link"
 
 msgid "Success"
 msgstr "Success"
+
+msgid "Failed"
+msgstr "Failed"
 
 msgid "Edited"
 msgstr "Edited"

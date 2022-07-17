@@ -24,7 +24,7 @@ msgstr "Видалення"
 msgid "Test mode On"
 msgstr "Тестовий режим увімкнено"
 
-msgid "Test mode On"
+msgid "Test mode Off"
 msgstr "Тестовий режим вимкнено"
 
 msgid "You want to perform an action on subfolders and files?"
@@ -56,5 +56,9 @@ msgstr "посилання"
 msgid "Success"
 msgstr "Успішно"
 
+msgid "Failed"
+msgstr "Невдало"
+
 msgid "Edited"
 msgstr "Відредаговано"
+

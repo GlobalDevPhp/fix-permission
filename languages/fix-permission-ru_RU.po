@@ -22,9 +22,9 @@ msgid "Deleting"
 msgstr "Удаление файлов"
 
 msgid "Test mode On"
-msgstr "Тэстовий режим включен"
+msgstr "Тестовий режим включен"
 
-msgid "Test mode On"
+msgid "Test mode Off"
 msgstr "Тестовий режим выключен"
 
 msgid "You want to perform an action on subfolders and files?"
@@ -55,6 +55,9 @@ msgstr "ссылка"
 
 msgid "Success"
 msgstr "Успешно"
+
+msgid "Failed"
+msgstr "Неудачно"
 
 msgid "Edited"
 msgstr "Изменено"
