@@ -84,7 +84,7 @@ class FixPermission {
      * @return void
      */
     public function init() {
-
+        
     }
 
     /**
@@ -100,7 +100,8 @@ class FixPermission {
         add_action('init', array($this, 'init'));
         add_action('admin_menu', array($this, 'admin_menu'));
         // Load Translation.
-        load_plugin_textdomain('fix-permission', false, basename( dirname( __FILE__ ) ) . '/languages');
+        load_plugin_textdomain('fix-permission', false, basename(dirname(__FILE__)) . '/languages');
+        add_action('wp_ajax_fix_permission', array($this, 'ajax_fix_permission'));
     }
 
     /**
@@ -112,7 +113,7 @@ class FixPermission {
      * @return void
      */
     public function admin_menu() {
-        add_management_page(__( 'Fix file permissions', 'fix-permission' ), __( 'Fix file permissions', 'fix-permission' ), 'activate_plugins', 'fix-permission', array('FixPermission', 'view'));
+        add_management_page(__('Fix file permissions', 'fix-permission'), __('Fix file permissions', 'fix-permission'), 'activate_plugins', 'fix-permission', array('FixPermission', 'view'));
     }
 
     /**
@@ -125,7 +126,7 @@ class FixPermission {
      * @return void
      */
     public function plugin_activation($network_wide) {
-
+        
     }
 
     /**
@@ -150,7 +151,7 @@ class FixPermission {
      * @return void
      */
     public function plugin_deactivation($network_wide) {
-
+        
     }
 
     /**
@@ -173,7 +174,6 @@ class FixPermission {
      * @access public
      * @return void
      */
-    
     public static function view() {
 
         if (!empty($_POST)) {
@@ -182,7 +182,7 @@ class FixPermission {
 
         include_once( FP_ABSPATH . '/views/admin.php' );
     }
-    
+
     /**
      * Check user sent data, prepare and create loop action class object
      *
@@ -196,7 +196,7 @@ class FixPermission {
         if (!isset($_POST['generated_nonce']) || !wp_verify_nonce($_POST['generated_nonce'], 'fix-permission-nonce')) {
             return;
         }
-        
+
         if ($_POST['action_type'] == 'deletion') {
             self::$instance->loop_obj = new DeleteLoop();
         } elseif ($_POST['action_type'] == 'permission') {
@@ -208,7 +208,38 @@ class FixPermission {
         self::$instance->loop_obj->test_mode = ($_POST['test_mode'] == 'true') ? true : false;
         self::$instance->loop_obj->setPaths(explode(PHP_EOL, $_POST['fperm_options_paths']));
         self::$instance->loop_obj->runLoop();
+    }
 
+    public function ajax_fix_permission() {
+        if (
+            !empty($_POST['action']) 
+            && !empty($_POST['fperm_options_paths'])
+            && !empty($_POST['action_type'])
+            && !empty($_POST['permission_flag'])
+            && !empty($_POST['test_mode'])
+            && !empty($_POST['recursion_on'])                        
+            ) {
+            // Verify Referer.
+            if (!check_admin_referer('fix-permission_revisions')) {
+                wp_send_json_error(
+                        array(
+                            'error' => __('Failed to verify referrer.', 'fix-permission'),
+                        )
+                );
+            } else {
+                $FP = self::get_instance();   
+
+                self::run_action();
+                $result = array();
+                if (!empty($FP->loop_obj)) {
+                    $result['statuses'] = $FP->loop_obj->getStatuses();
+                    $result['paths'] = $FP->loop_obj->getPaths();
+                    $result['logs'] = implode(PHP_EOL, $FP->loop_obj->log);
+                }      
+                wp_send_json_success($result);
+            }
+        }
+        wp_die();
     }
 
 }
