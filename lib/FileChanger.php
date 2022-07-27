@@ -77,7 +77,7 @@ class UpdatePermission implements FileChanger {
     public function apply(string $path) {
         $result = true;
         if (!$this->test_mode)
-            $result = chmod($path, $this->permission_flag);
+            $result = @chmod($path, $this->permission_flag);
         
         return $result;
     }
@@ -202,6 +202,15 @@ abstract class FilesLoopAbstract {
      */    
     private $active_path_key;
     
+    /**
+     * FileChanger instance 
+     *
+     * @since 1.0.0
+     *
+     * @access private
+     * @var FileChanger $changer_instance
+     */
+    private $changer_instance;
     
     /**
      * Factory method return objects of interface FileChanger
@@ -274,6 +283,7 @@ abstract class FilesLoopAbstract {
      * @return void
      */ 
     public function runLoop () {
+        $this->changer_instance = $this->getAction();
         foreach ($this->path_array AS $key => $path) {
             $this->active_path_key = $key;
             $this->progress_count[$key] = 0;
@@ -293,8 +303,6 @@ abstract class FilesLoopAbstract {
     private function applyAction(string $path) {
         if (!file_exists($path))
             return false;
-        
-        $changerObject = $this->getAction();
 
         if (is_dir($path) && $this->recursion) {
             $dir_handle = opendir($path);
@@ -304,7 +312,7 @@ abstract class FilesLoopAbstract {
             while($file = readdir($dir_handle)) {
                 if ($file != "." && $file != "..") {
                     if (!is_dir($path.'/'.$file)) {
-                        if ($changerObject->apply($path.'/'.$file)) {
+                        if ($this->changer_instance->apply($path.'/'.$file)) {
                             $this->progress_count[$this->active_path_key]++;
                             $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path.'/'.$file;
                         } else 
@@ -317,7 +325,7 @@ abstract class FilesLoopAbstract {
             closedir($dir_handle);
         }
         
-        if ($changerObject->apply($path)) {
+        if ($this->changer_instance->apply($path)) {
             $this->progress_count[$this->active_path_key]++;
             $this->log[] = __( 'Success', 'fix-permission' ). '- '.$path;
         } else 
